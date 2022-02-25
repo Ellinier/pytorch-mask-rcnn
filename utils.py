@@ -456,7 +456,12 @@ def generate_pyramid_anchors(scales, ratios, feature_shapes, feature_strides,
     return np.concatenate(anchors, axis=0)
 
 
-
-
-
-
+if __name__ == '__main__':
+    scales = (32, 64, 128, 256, 512)
+    ratios = [0.5, 1, 2]
+    image_shape = np.array([1024, 1024, 3])
+    backbone_strides = [4, 8, 16, 32, 64]
+    shape = np.array([[int(math.ceil(image_shape[0] / stride)), int(math.ceil(image_shape[1] / stride))] for stride in backbone_strides])
+    feature_stride = [4, 8, 16, 32, 64]
+    anchor_stride = 1
+    generate_anchors(scales[0], ratios, shape[0], feature_stride[0], anchor_stride)
